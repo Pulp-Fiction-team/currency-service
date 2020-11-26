@@ -76,7 +76,7 @@ public class CurrencyServiceImpl implements CurrencyService {
     }
 
     @Override
-    public Flux<Currency> findByName(String name) {
+    public Mono<Currency> findByName(String name) {
         return currencyRepository.findByName(name);
     }
 

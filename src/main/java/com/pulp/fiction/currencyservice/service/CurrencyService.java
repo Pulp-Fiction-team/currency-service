@@ -9,7 +9,7 @@ public interface CurrencyService {
 
     Flux<Currency> findAll();
 
-    Flux<Currency> findByName(String name);
+    Mono<Currency> findByName(String name);
 
     Mono<Void> deleteAll();
 }

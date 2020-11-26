@@ -12,7 +12,7 @@ public interface CurrencyRepository extends ReactiveMongoRepository<Currency, St
     @Override
     Flux<Currency> findAll();
 
-    Flux<Currency> findByName(String s);
+    Mono<Currency> findByName(String s);
 
     @Override
     <S extends Currency> Mono<S> save(S s);

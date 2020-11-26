@@ -36,7 +36,7 @@ public class CurrencyController {
     }
 
     @RequestMapping(path = "/currency/{name}", method = RequestMethod.GET)
-    public ResponseEntity<Flux<CurrencyDto>> getCurrencyByName(
+    public ResponseEntity<Mono<CurrencyDto>> getCurrencyByName(
             @PathVariable(name = "name") String name
     ) {
         return ResponseEntity.ok(
