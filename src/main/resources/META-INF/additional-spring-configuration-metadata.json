@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "converter.scale",
+      "type": "java.lang.Integer",
+      "description": "Scale to use in currency value convertation."
+  }
+] }

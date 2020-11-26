@@ -3,7 +3,9 @@ package com.pulp.fiction.currencyservice.service;
 import com.pulp.fiction.currencyservice.model.entity.Currency;
 import com.pulp.fiction.currencyservice.model.entity.Rate;
 import com.pulp.fiction.currencyservice.repository.CurrencyRepository;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -17,7 +19,11 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Service
+@Setter
 public class CurrencyServiceImpl implements CurrencyService {
+
+    @Value("${converter.scale}")
+    private int converterScale;
 
     @Autowired
     private CurrencyRepository currencyRepository;
@@ -46,7 +52,7 @@ public class CurrencyServiceImpl implements CurrencyService {
                                                 String otherValuesAsString = otherRate.getValue();
                                                 BigDecimal otherValue = new BigDecimal(otherValuesAsString);
 
-                                                BigDecimal newRate = otherValue.divide(value, 4, RoundingMode.HALF_EVEN);
+                                                BigDecimal newRate = otherValue.divide(value, converterScale, RoundingMode.HALF_EVEN);
 
                                                 return Rate.builder()
                                                         .name(otherName)
