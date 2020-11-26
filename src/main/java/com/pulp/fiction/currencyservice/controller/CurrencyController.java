@@ -7,6 +7,7 @@ import com.pulp.fiction.currencyservice.service.CurrencyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,12 +26,22 @@ public class CurrencyController {
     private CurrencyMapper currencyMapper;
 
     @RequestMapping(path = "/currency", method = RequestMethod.POST)
-    public ResponseEntity<Flux<Currency>> saveAuthor(@RequestBody CurrencyDto currencyDto) {
+    public ResponseEntity<Flux<Currency>> saveCurrency(@RequestBody CurrencyDto currencyDto) {
         Currency currency = currencyMapper.currencyDtoToCurrency(currencyDto);
         return ResponseEntity.ok(
                 currencyService.save(
                         currency
                 )
+        );
+    }
+
+    @RequestMapping(path = "/currency/{name}", method = RequestMethod.GET)
+    public ResponseEntity<Flux<CurrencyDto>> getCurrencyByName(
+            @PathVariable(name = "name") String name
+    ) {
+        return ResponseEntity.ok(
+                currencyService.findByName(name)
+                        .map(currencyMapper::currencyToCurrencyDto)
         );
     }
 
@@ -40,7 +51,7 @@ public class CurrencyController {
     }
 
     @RequestMapping(value = "/currencies", method = RequestMethod.DELETE)
-    public ResponseEntity<Mono<Void>> deleteAll(){
+    public ResponseEntity<Mono<Void>> deleteAll() {
         return ResponseEntity.ok(currencyService.deleteAll());
     }
 }
