@@ -1,0 +1,79 @@
+{
+	"info": {
+		"_postman_id": "09cca727-88c4-41b3-a7c3-1b4ef6fa8a90",
+		"name": "currency-service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET currencies",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{protocol}}://{{hostname}}:{{port}}/api/currencies",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{hostname}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"currencies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Currency",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"name\":\"USD\",\n   \"rates\":[\n            {\n                \"name\" : \"UAH\", \n                \"value\":\"28.36706\"\n            },\n            {\n                \"name\" : \"USD\",\n                \"value\" :\"1.0\"\n            },\n            {\n                \"name\" : \"EUR\",\n                \"value\" :\"0.840527\"\n            }\n   ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{protocol}}://{{hostname}}:{{port}}/api/currency",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{hostname}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"currency"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE ALL currencies",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{protocol}}://{{hostname}}:{{port}}/api/currencies",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{hostname}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"currencies"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
